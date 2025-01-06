@@ -2,7 +2,7 @@
 :set number
 :set tabstop=2
 :set shiftwidth=2
-:set softtabstop=2 
+:set softtabstop=2
 :set smartindent
 :set autoindent
 :set expandtab
@@ -11,8 +11,12 @@ let mapleader=" "
 nnoremap <leader>e :Ex<CR>
 
 
+vnoremap <A-Left> <gv
+vnoremap <A-Right> >gv
 vnoremap <A-Up> :m '<-2<CR>gv=gv
 vnoremap <A-Down> :m '>+1<CR>gv=gv
+nnoremap <A-Left> <<
+nnoremap <A-Right> >>
 nnoremap <A-Up> :m .-2<CR>==
 nnoremap <A-Down> :m .+1<CR>==
 nnoremap <leader>hl :nohlsearch<CR>
@@ -21,4 +25,4 @@ nnoremap <C-Left> :bprev<CR>
 nnoremap <C-Right> :bnext<CR>
 
 highlight Visual ctermbg=DarkGray guibg=DarkGray
-
+hi Cursor guifg=black guibg=gray
