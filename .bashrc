@@ -1,4 +1,7 @@
+# include these command into your existing .bashrc file
+
 alias src=source
+alias cpy=/usr/local/bin/cpy
 
 dd(){
   local dir=$1
