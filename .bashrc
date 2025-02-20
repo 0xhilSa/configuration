@@ -1,6 +1,14 @@
 # include these command into your existing .bashrc file
 
 alias src=source
+alias cls=clear
+alias python=python3
+alias py=python3
+alias ipython=ipython3
+alias ipy=ipython3
+alias duh="du -h --max-depth=1"
+alias as=arm-linux-gnueabi-as
+alias as-gcc=arm-linux-gnueabi-gcc
 
 dd(){
   local dir=$1
@@ -61,4 +69,75 @@ cpy(){
     echo "Error: No clipboard utility found. Install xclip, xsel, pbcopy, or use WSL on Windows."
     return 1
   fi
+}
+
+ffind(){
+  find . -type f -iname "*$1*"
+}
+
+extract(){
+  if [ -f "$1" ]; then
+    case "$1" in
+      *.tar.bz2) tar xvjf "$1" ;;
+      *.tar.gz) tar xvzf "$1" ;;
+      *.bz2) tar bunzip2 "$1" ;;
+      *.rar) unrar x "$1" ;;
+      *.gz) gunzip "$1" ;;
+      *.tar) tar xvf "$1" ;;
+      *.tbz2) tar xvjf "$1" ;;
+      *.tgz) tar xvzf "$1" ;;
+      *.zip) unzip "$1" ;;
+      *.Z) ncompress "$1" ;;
+      *.7z) 7z x "$1" ;;
+      *) echo "Cannot extract: Unknown format" ;;
+    esac
+  else
+    echo "Usage: extract <file>"
+  fi
+}
+
+bak(){
+  local src=$1
+  local dst="${src}_backup_$(date +"%Y%m%d%H%M%S")"
+  cp -r "$src" "$dst"
+  echo "backup created: $dst"
+}
+
+ip(){
+  echo "$(curl -s https://ipinfo.io/ip)"
+}
+
+sysinfo() {
+  echo "Hostname: $(hostname)"
+  echo "Uptime: $(uptime -p)"
+  echo "Memory Usage: $(free -h | awk '/Mem:/ {print $3 "/" $2}')"
+  echo "Disk Usage: $(df -h / | awk 'NR==2 {print $3 "/" $2}')"
+  echo "CPU Load: $(uptime | awk -F'load average: ' '{print $2}')"
+  echo "Arch: $(uname -p)"
+  echo "OS: $(uname -o)"
+  echo "Kernel Version: $(uname -v)"
+}
+
+gs(){
+  git status
+}
+
+gl(){
+  git log
+}
+
+gd(){
+  git diff "$@"
+}
+
+ga(){
+  git add "$@"
+}
+
+gc(){
+  git commit -m "$*"
+}
+
+gp(){
+  git push -u "$1" "$2"
 }
