@@ -139,5 +139,7 @@ gc(){
 }
 
 gp(){
-  git push -u "$1" "$2"
+  local remote="${1:-org}"
+  local branch="${2:-master}"
+  git push -u "$remote" "$branch"
 }
