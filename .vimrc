@@ -48,7 +48,6 @@ nnoremap <silent> gr :call CocAction('jumpReferences')<CR>
 nnoremap <silent> gi :call CocAction('jumpImplementation')<CR>
 nnoremap <silent> <leader>d :CocDiagnostics<CR>
 
-inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "<CR>"
 
 nnoremap <leader>f :CocCommand editor.action.formatDocument<CR>
