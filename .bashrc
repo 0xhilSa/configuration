@@ -1,5 +1,7 @@
 # include these command into your existing .bashrc file
 
+export TERM=xterm-256color
+
 alias src=source
 alias cls=clear
 alias python=python3
@@ -9,6 +11,7 @@ alias ipy=ipython3
 alias duh="du -h --max-depth=1"
 alias as=arm-linux-gnueabi-as
 alias as-gcc=arm-linux-gnueabi-gcc
+alias tls='tmux list-session'
 
 dd(){
   local dir=$1
@@ -143,3 +146,39 @@ gp(){
   local branch="${2:-master}"
   git push -u "$remote" "$branch"
 }
+
+tkill(){
+  if ! tmux list-session &>/dev/null; then
+    echo "No active TMUX session found!"
+    return
+  fi
+
+  if [ -n "$1" ]; then
+    tmux kill-session -t "$1"
+  else
+    read -p "Are you sure you want to kill ALL tmux sessions? (y/N): " confirm
+    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+      tmux kill-server
+    else
+      echo "Operation canceled."
+    fi
+  fi
+}
+
+tas(){
+  tmux attach-session -t "$1"
+}
+
+tns(){
+  if [ -z "$1" ]; then
+    tmux new-session
+    return
+  fi
+  if tmux has-session -t "$1" 2>/dev/null; then
+    echo "ERROR: session '$1' already exist"
+  else
+    tmux new-session -s "$1"
+  fi
+}
+
+
