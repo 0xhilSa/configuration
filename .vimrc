@@ -3,14 +3,13 @@ syntax on
 :set number
 :set tabstop=2
 :set shiftwidth=2
-:set softtabstop=2 
+:set softtabstop=2
 :set smartindent
 :set autoindent
 :set expandtab
 
 
 let mapleader=" "
-
 nnoremap <leader>e :Ex<CR>
 
 vnoremap <A-Left> <gv
@@ -30,8 +29,11 @@ highlight Visual ctermbg=DarkGray guibg=DarkGray
 hi Cursor guifg=black guibg=gray
 
 call plug#begin('~/.vim/plugged')
+  Plug 'plasticboy/vim-markdown'
+  Plug 'godlygeek/tabular'
   Plug 'morhetz/gruvbox'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -47,6 +49,7 @@ nnoremap <silent> gd :call CocAction('jumpDefinition')<CR>
 nnoremap <silent> gr :call CocAction('jumpReferences')<CR>
 nnoremap <silent> gi :call CocAction('jumpImplementation')<CR>
 nnoremap <silent> <leader>d :CocDiagnostics<CR>
+nnoremap <leader>md :!glow %<CR>
 
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "<CR>"
 
@@ -54,4 +57,6 @@ nnoremap <leader>f :CocCommand editor.action.formatDocument<CR>
 autocmd FileType python setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 set background=dark
+let g:gruvbox_contrast_dark="hard"
+set termguicolors
 colorscheme gruvbox
