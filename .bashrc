@@ -180,5 +180,3 @@ tns(){
     tmux new-session -s "$1"
   fi
 }
-
-
