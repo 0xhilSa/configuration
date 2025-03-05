@@ -7,7 +7,7 @@ syntax on
 :set smartindent
 :set autoindent
 :set expandtab
-
+:set cursorline
 
 let mapleader=" "
 nnoremap <leader>e :Ex<CR>
@@ -32,13 +32,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'plasticboy/vim-markdown'
   Plug 'godlygeek/tabular'
   Plug 'morhetz/gruvbox'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
 call plug#end()
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*" --glob "!node_modules/*" --glob "!__pycache__/*"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*" --glob "!node_modules/*" --glob "!__pycache__/*" --glob "!*.swp" --glob "!*.blob" --glob "!.ccls-cache/"'
 let $FZF_DEFAULT_OPTS = '--layout=reverse --border=rounded --info=inline --height=40% --preview-window=right:60% --color=bg+:#282a36,fg:#f8f8f2,hl:#ff79c6,fg+:#50fa7b,pointer:#ffb86c,marker:#8be9fd'
 
 let g:coc_global_extensions = [
