@@ -9,7 +9,7 @@ require("mason").setup({
 })
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "lua", "python", "c", "cpp", "cuda", "rust", "javascript", "vim", "bash" },
+  ensure_installed = { "lua", "python", "c", "cpp", "cuda", "rust", "javascript", "vim", "verilog", "bash" },
   highlight = {
     enable = true,
   },
@@ -123,8 +123,6 @@ for _, server in ipairs(servers) do
     flags = { debounce_text_changes = 150 },
   })
 end
-
-local cmp = require'cmp'
 
 cmp.setup({
   snippet = {
