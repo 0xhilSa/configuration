@@ -36,6 +36,8 @@ packer.startup(function(use)
   use("neovim/nvim-lspconfig")
   use("nvim-lua/plenary.nvim")
   use("williamboman/mason.nvim")
+  use("rose-pine/neovim")
+  use("tpope/vim-fugitive")
   use {
     'hrsh7th/nvim-cmp',
     requires = {
@@ -62,9 +64,15 @@ packer.startup(function(use)
       require("catppuccin").setup({
         transparent_background = true,
       })
-      vim.cmd("colorscheme catppuccin-mocha")
     end,
   })
+  use({
+    'MeanderingProgrammer/render-markdown.nvim',
+    after = { 'nvim-treesitter' },
+    config = function()
+        require('render-markdown').setup({})
+    end,
+})
   if packer_bootstrap then
     require("packer").sync()
   end

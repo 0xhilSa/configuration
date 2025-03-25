@@ -44,13 +44,13 @@ require('telescope').setup({
     sorting_strategy = "ascending",
     prompt_prefix = "🔍 ",
     selection_caret = "➜ ",
-    winblend = 10,
+    winblend = 0,
   },
 })
 
 require("lualine").setup({
   options = {
-    theme = "catppuccin",
+    theme = "auto",
     icons_enabled = true,
     section_separators = { left = "", right = "" },
     component_separators = { left = "/", right = "/" },
@@ -82,14 +82,13 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },  -- Snippet completion
+    { name = 'luasnip' },
   }, {
     { name = 'buffer' },
     { name = 'path' }
   })
 })
 
--- Setup completion for command line
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -101,9 +100,19 @@ cmp.setup.cmdline(':', {
 
 local lspconfig = require("lspconfig")
 
+lspconfig.emmet_ls.setup({
+  filetypes = { "html", "css", "javascript", "javascriptreact", "typescriptreact" },
+  init_options = {
+    html = {
+      options = {
+        ["bem.enabled"] = true
+      }
+    }
+  }
+})
+
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
-
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -148,7 +157,6 @@ cmp.setup({
   })
 })
 
--- Auto-completion in command mode
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
