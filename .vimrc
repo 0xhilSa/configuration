@@ -1,3 +1,5 @@
+let mapleader = " "
+
 syntax on
 :set number
 :set relativenumber
@@ -22,8 +24,6 @@ nnoremap <A-Down> :m .+1<CR>==
 nnoremap <leader>hl :nohlsearch<CR>
 nnoremap <C-Left> :bprev<CR>
 nnoremap <C-Right> :bnext<CR>
-
-let mapleader = " "
 
 autocmd BufWritePre * %s/\s\+$//e
 
