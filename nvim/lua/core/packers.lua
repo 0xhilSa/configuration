@@ -66,13 +66,6 @@ packer.startup(function(use)
       })
     end,
   })
-  use({
-    'MeanderingProgrammer/render-markdown.nvim',
-    after = { 'nvim-treesitter' },
-    config = function()
-        require('render-markdown').setup({})
-    end,
-})
   if packer_bootstrap then
     require("packer").sync()
   end

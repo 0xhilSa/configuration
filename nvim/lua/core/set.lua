@@ -9,6 +9,7 @@ vim.opt.smartindent = false
 vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.mouse = ""
+vim.opt.scrolloff = 5
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>e", "<cmd>Ex<CR>")
@@ -41,6 +42,16 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab"
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "zig",
+    command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab"
+})
+
 vim.opt.background = "dark"
 vim.cmd[[highlight Normal guibg=NONE ctermbg=NONE]]
 
@@ -50,7 +61,6 @@ vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "Git Files" })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>fl', builtin.current_buffer_fuzzy_find, { desc = "Find in Buffer" })
 vim.keymap.set('n', '<leader>fh', builtin.oldfiles, { desc = "File History" })
-
 
 vim.cmd("colorscheme rose-pine")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
