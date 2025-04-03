@@ -1,12 +1,12 @@
 syntax on
 :set number
 :set relativenumber
-:set scrolloff=5
 :set tabstop=2
 :set shiftwidth=2
 :set softtabstop=2
-:set expandtab
 :set laststatus=2
+:set expandtab
+:set scrolloff=5
 set incsearch
 set hlsearch
 set statusline=%f\ %y\ [%{&fileencoding}]\ %m\ %r\ %=%l/%L
@@ -26,7 +26,6 @@ nnoremap <C-Right> :bnext<CR>
 let mapleader = " "
 
 autocmd BufWritePre * %s/\s\+$//e
-autocmd FileType python,c,cpp,cuda,html,css,javascript,typescript,rust,asm,zig setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 call plug#begin()
   Plug 'rose-pine/vim'
@@ -70,8 +69,8 @@ nnoremap <silent> gi :call CocAction('jumpImplementation')<CR>
 nnoremap <silent> <leader>cd :CocDiagnostics<CR>
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "<CR>"
 
-autocmd FileType python,c,cpp,cuda,fortran,zig,rust setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType python,c,cpp,rust,cuda,zig,fortran setlocal omnifunc=coc#refresh()
+autocmd FileType python,c,cpp,cuda,html,css,javascript,typescript,rust,asm,zig setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 hi Normal guibg=NONE ctermbg=NONE
 hi VertSplit guibg=NONE ctermbg=NONE
