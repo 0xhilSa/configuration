@@ -1,6 +1,7 @@
 # include these command into your existing .bashrc file
 
 export TERM=xterm-256color
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 alias src=source
 alias cls=clear

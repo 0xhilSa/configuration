@@ -9,9 +9,20 @@ syntax on
 :set laststatus=2
 :set expandtab
 :set scrolloff=5
+:set nowrap
+set title
+set showcmd
+set noswapfile
 set incsearch
 set hlsearch
 set statusline=%f\ %y\ [%{&fileencoding}]\ %m\ %r\ %=%l/%L
+set path+=/home/hilsa/.local/lib/python3.10/site-packages/numpy/_core/include
+set path+=**
+set path+=include,**
+
+set wildignore+=*.pyc,*.pyo,*/__pycache__/*
+set wildignore+=*.zip,*.tar
+set wildignore+=*.swp,~*
 
 vnoremap <A-Left> <gv
 vnoremap <A-Right> >gv
@@ -33,18 +44,21 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'vhda/verilog_systemverilog.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 call plug#end()
 
 set background=dark
 colorscheme rosepine
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*" --glob "!node_modules/*" --glob "!__pycache__/*" --glob "!*.swp" --glob "!*.blob" --glob "!.ccls-cache/" --glob "!.npm/" --glob "!.nvm/" --glob "!.vim/" --glob "!.nuget/"'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*" --glob "!node_modules/*" --glob "!*/__pycache__/*" --glob "!*.swp" --glob "!*.blob" --glob "!.ccls-cache/" --glob "!.npm/" --glob "!.nvm/" --glob "!.vim/" --glob "!.nuget/"'
 
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>fl :Lines<CR>
 nnoremap <leader>fh :History<CR>
+nnoremap <leader>e :Ex<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-clangd',
@@ -71,6 +85,8 @@ inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "<CR>"
 
 autocmd FileType python,c,cpp,rust,cuda,zig,fortran setlocal omnifunc=coc#refresh()
 autocmd FileType python,c,cpp,cuda,html,css,javascript,typescript,rust,asm,zig setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
+command! W w
 
 hi Normal guibg=NONE ctermbg=NONE
 hi VertSplit guibg=NONE ctermbg=NONE
